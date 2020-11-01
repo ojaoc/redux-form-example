@@ -19,7 +19,7 @@
     "devDependencies": {
         "@types/node": "^14.14.6",
         "@types/react": "^16.9.55",
-        "redux-devtools": "^3.7.0",
+        "redux-devtools-extension": "^2.13.8",
         "typescript": "^4.0.5"
     }
 }

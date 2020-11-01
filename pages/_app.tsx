@@ -6,9 +6,11 @@ import { createStore } from "redux";
 import rootReducer from "../src/reducers";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { composeWithDevTools } from "redux-devtools-extension";
 import theme from "../src/theme";
+import Head from "next/head";
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 function MyApp({ Component, pageProps }: AppProps) {
     useEffect(() => {
@@ -20,12 +22,17 @@ function MyApp({ Component, pageProps }: AppProps) {
     }, []);
 
     return (
-        <Provider store={store}>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Component {...pageProps} />
-            </ThemeProvider>
-        </Provider>
+        <>
+            <Head>
+                <title>Redux Form | ojaoc</title>
+            </Head>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Component {...pageProps} />
+                </ThemeProvider>
+            </Provider>
+        </>
     );
 }
 
