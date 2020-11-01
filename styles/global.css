@@ -1,1 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+body {
+    font-family: "Roboto", sans-serif;
+    overflow: hidden;
+    background-image: url("../public/redux-logo.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-origin: content-box;
+}
