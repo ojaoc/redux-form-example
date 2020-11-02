@@ -62,7 +62,7 @@ const renderTextField = ({ label, input, meta: { touched, invalid, error }, ...c
     />
 );
 
-const Form = ({ handleSubmit, pristine, reset, submitting, invalid }) => {
+const Form = ({ handleSubmit, pristine, reset, submitting }) => {
     const classes = useStyles();
     return (
         <form onSubmit={handleSubmit}>
