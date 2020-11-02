@@ -45,3 +45,19 @@ describe("<StoreDisplay /> renders text correctly", () => {
         // "" around the string
     });
 });
+
+describe("<StoreDisplay /> contains a <pre> inside a <h5>", () => {
+    it("Contains", () => {
+        const { container } = render(
+            <Provider store={store}>
+                <StoreDisplay />
+            </Provider>
+        );
+
+        const h5 = container.querySelector("h5");
+        const pre = h5.firstChild;
+
+        expect(h5).toBeInTheDocument();
+        expect(pre).toBeInTheDocument();
+    });
+});
