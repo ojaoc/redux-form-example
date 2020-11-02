@@ -51,12 +51,18 @@ const renderTextField = ({ label, input, meta: { touched, invalid, error }, ...c
         helperText={touched && error}
         label={label}
         variant="outlined"
+        inputProps={{
+            autoComplete: "new-password",
+            form: {
+                autoComplete: "off",
+            },
+        }}
         {...input}
         {...custom}
     />
 );
 
-const Form = ({ handleSubmit, pristine, reset, submitting, invalid }) => {
+const Form = ({ handleSubmit, pristine, reset, submitting }) => {
     const classes = useStyles();
     return (
         <form onSubmit={handleSubmit}>
