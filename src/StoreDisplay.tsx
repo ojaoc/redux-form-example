@@ -8,7 +8,7 @@ const StoreDisplay = () => {
     );
     return (
         <Typography variant="h5">
-            <pre>{JSON.stringify(formData, null, 4)}</pre>
+            <pre data-testid="pre-display-text">{JSON.stringify(formData, null, 4)}</pre>
         </Typography>
     );
 };
