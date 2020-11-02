@@ -54,7 +54,7 @@ describe("<StoreDisplay /> contains a <pre> inside a <h5>", () => {
             </Provider>
         );
 
-        const h5 = container.querySelector("h5");
+        const h5 = container.querySelector("h4");
         const pre = h5.firstChild;
 
         expect(h5).toBeInTheDocument();
