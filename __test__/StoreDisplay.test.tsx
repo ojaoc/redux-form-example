@@ -12,16 +12,6 @@ jest.mock("react-redux", () => ({
     useSelector: jest.fn(),
 }));
 
-describe("<StoreDisplay /> renders without crashing", () => {
-    it("Mounts", () => {
-        render(
-            <Provider store={store}>
-                <StoreDisplay />
-            </Provider>
-        );
-    });
-});
-
 describe("<StoreDisplay /> renders text correctly", () => {
     const mockData = "Sample Data";
 
