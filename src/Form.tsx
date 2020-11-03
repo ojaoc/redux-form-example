@@ -83,6 +83,7 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
                         variant="contained"
                         size="medium"
                         color="secondary"
+                        data-testid="clear-button-form"
                     >
                         Clear
                     </Button>
