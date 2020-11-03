@@ -17,5 +17,3 @@ describe("<Form /> renders without crashing", () => {
         );
     });
 });
-
-
