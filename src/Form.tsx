@@ -94,6 +94,7 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
                         variant="contained"
                         size="medium"
                         color="primary"
+                        data-testid="submit-button-form"
                     >
                         Submit
                     </Button>
