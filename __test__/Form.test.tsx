@@ -25,37 +25,43 @@ describe("<Form /> elements work properly", () => {
     });
 
     it("Submit button enables by entering any value into form", () => {
-        const { rerender, getByTestId } = render(
+        const { container, getByTestId } = render(
             <Provider store={store}>
                 <Form />
             </Provider>
         );
         expect(getByTestId("submit-button-form")).toHaveAttribute("disabled");
 
-        store.dispatch(change("user-info", "username", "johny"));
-        rerender(
-            <Provider store={store}>
-                <Form />
-            </Provider>
-        );
+        fireEvent.change(container.querySelector("input[type='text']"), {
+            target: { value: "Sample Text" },
+        });
+
         expect(getByTestId("submit-button-form")).not.toHaveAttribute("disabled");
     });
 
     it("Clear button enables by entering any value into form", () => {
-        const { rerender, getByTestId } = render(
+        const { container, getByTestId } = render(
             <Provider store={store}>
                 <Form />
             </Provider>
         );
         expect(getByTestId("clear-button-form")).toHaveAttribute("disabled");
 
-        store.dispatch(change("user-info", "username", "johny"));
-        rerender(
+        fireEvent.change(container.querySelector("input[type='text']"), {
+            target: { value: "Sample Text" },
+        });
+
+        expect(getByTestId("clear-button-form")).not.toHaveAttribute("disabled");
+    });
+
+    it("Clear button has Clear written on it", () => {
+        const { getByTestId } = render(
             <Provider store={store}>
                 <Form />
             </Provider>
         );
-        expect(getByTestId("clear-button-form")).not.toHaveAttribute("disabled");
+        const { getByText } = within(getByTestId("clear-button-form"));
+        expect(getByText("Clear")).toBeInTheDocument();
     });
 
     it("Should not run validations onClickOut -> TextFields TYPE TEXT if they are empty", () => {
@@ -82,5 +88,39 @@ describe("<Form /> elements work properly", () => {
             fireEvent.blur(input);
             expect(input).toHaveAttribute("aria-invalid", "false");
         });
+    });
+
+    it("Clear button works properly", () => {
+        const { container, getByTestId } = render(
+            <Provider store={store}>
+                <Form />
+            </Provider>
+        );
+
+        container.querySelectorAll("input[type='text']").forEach((input) => {
+            fireEvent.focus(input);
+            fireEvent.change(input, { target: { value: "Sample Text" } });
+            fireEvent.blur(input);
+        });
+
+        container.querySelectorAll("input[type='password']").forEach((input) => {
+            fireEvent.focus(input);
+            fireEvent.change(input, { target: { value: "SamplePass123!" } });
+            fireEvent.blur(input);
+        });
+
+        const clearButton = getByTestId("clear-button-form");
+        expect(clearButton).not.toHaveAttribute("disabled");
+
+        fireEvent.click(clearButton);
+
+        container.querySelectorAll("input[type='text']").forEach((input) => {
+            expect(input).toHaveValue("");
+        });
+        container.querySelectorAll("input[type='password']").forEach((input) => {
+            expect(input).toHaveValue("");
+        });
+
+        expect(clearButton).toHaveAttribute("disabled");
     });
 });

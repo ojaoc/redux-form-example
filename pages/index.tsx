@@ -33,7 +33,7 @@ export default function Home() {
     );
     return (
         <>
-            <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+            <Box display="flex" justifyContent="center" alignItems="center" marginTop="15vh">
                 <Grid container spacing={4} className={classes.container}>
                     <Grid item xs={12} xl={7}>
                         <Paper elevation={4} className={classes.paperForm}>
