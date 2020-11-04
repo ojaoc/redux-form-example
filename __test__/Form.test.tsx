@@ -143,6 +143,8 @@ describe("<Form /> elements work properly", () => {
 
         fireEvent.click(submitButton);
 
+        expect(handleSubmit).not.toHaveBeenCalled();
+
         container.querySelectorAll("input[type='text']").forEach((input) => {
             expect(input).toHaveAttribute("aria-invalid", "true");
         });
@@ -182,5 +184,30 @@ describe("<Form /> elements work properly", () => {
             fireEvent.blur(input);
             expect(input).toHaveValue("");
         });
+    });
+
+    it("HandleSubmit function should only be called if all validations pass", () => {
+        const handleSubmit = jest.fn();
+
+        const { container, getByTestId } = render(
+            <Provider store={store}>
+                <Form onSubmit={handleSubmit} />
+            </Provider>
+        );
+
+        const submitButton = getByTestId("submit-button-form");
+        expect(submitButton).toHaveAttribute("disabled");
+
+        container.querySelectorAll("input").forEach((input) => {
+            fireEvent.focus(input);
+            fireEvent.change(input, { target: { value: "Teste123!" } });
+            fireEvent.blur(input);
+        });
+
+        expect(submitButton).not.toHaveAttribute("disabled");
+
+        fireEvent.click(submitButton);
+
+        expect(handleSubmit).toHaveBeenCalledTimes(1);
     });
 });
