@@ -4,7 +4,6 @@ import { fireEvent, render, within } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import { change } from "redux-form";
 import rootReducer from "../src/reducers";
 
 describe("<Form /> elements work properly", () => {
@@ -146,6 +145,42 @@ describe("<Form /> elements work properly", () => {
 
         container.querySelectorAll("input[type='text']").forEach((input) => {
             expect(input).toHaveAttribute("aria-invalid", "true");
+        });
+    });
+
+    it("The title of the form should be an h3 with the text 'Redux Form example'", () => {
+        const { container } = render(
+            <Provider store={store}>
+                <Form />
+            </Provider>
+        );
+
+        const title = container.querySelector("h3");
+
+        expect(title).toBeInTheDocument();
+        expect(title).toHaveTextContent("Redux Form example");
+    });
+
+    it("All inputs show value that is being inserted", () => {
+        const { container } = render(
+            <Provider store={store}>
+                <Form />
+            </Provider>
+        );
+
+        container.querySelectorAll("input").forEach((input) => {
+            fireEvent.focus(input);
+            fireEvent.change(input, { target: { value: "Example" } });
+            expect(input).toHaveValue("Example");
+
+            fireEvent.change(input, { target: { value: "Exampl" } });
+
+            expect(input).not.toHaveValue("Example");
+            expect(input).toHaveValue("Exampl");
+
+            fireEvent.change(input, { target: { value: "" } });
+            fireEvent.blur(input);
+            expect(input).toHaveValue("");
         });
     });
 });
