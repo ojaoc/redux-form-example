@@ -123,4 +123,29 @@ describe("<Form /> elements work properly", () => {
 
         expect(clearButton).toHaveAttribute("disabled");
     });
+
+    it("White space by itself shouldn't count in validation", () => {
+        const handleSubmit = jest.fn();
+
+        const { container, getByTestId } = render(
+            <Provider store={store}>
+                <Form onSubmit={handleSubmit} />
+            </Provider>
+        );
+
+        container.querySelectorAll("input[type='text']").forEach((input) => {
+            fireEvent.focus(input);
+            fireEvent.change(input, { target: { value: "      " } });
+            fireEvent.blur(input);
+        });
+
+        const submitButton = getByTestId("submit-button-form");
+        expect(submitButton).not.toHaveAttribute("disabled");
+
+        fireEvent.click(submitButton);
+
+        container.querySelectorAll("input[type='text']").forEach((input) => {
+            expect(input).toHaveAttribute("aria-invalid", "true");
+        });
+    });
 });
