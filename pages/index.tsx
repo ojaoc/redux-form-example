@@ -33,14 +33,14 @@ export default function Home() {
     );
     return (
         <>
-            <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+            <Box display="flex" justifyContent="center" alignItems="center" marginTop="15vh">
                 <Grid container spacing={4} className={classes.container}>
-                    <Grid item xs={7} xl={8}>
+                    <Grid item xs={12} xl={7}>
                         <Paper elevation={4} className={classes.paperForm}>
                             <Form onSubmit={console.log} />
                         </Paper>
                     </Grid>
-                    <Grid item xs={5} xl={4}>
+                    <Grid item xs={12} xl={5}>
                         <Fade in={isSubmit}>
                             <Paper elevation={4} className={classes.paperDisplay}>
                                 <StoreDisplay />

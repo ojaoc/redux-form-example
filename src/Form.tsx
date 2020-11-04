@@ -44,7 +44,7 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
                 Redux Form example
             </Typography>
             <Grid container spacing={4} justify="flex-end">
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Field
                         id="username-input"
                         label="Username"
@@ -53,7 +53,7 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
                         component={renderTextField}
                     />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Field
                         id="password-input"
                         label="Password"
@@ -63,7 +63,7 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
                         component={renderTextField}
                     />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Field
                         id="first-name-input"
                         label="First name"
@@ -72,7 +72,7 @@ const Form = ({ handleSubmit, pristine, reset, submitting }) => {
                         component={renderTextField}
                     />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Field
                         id="last-name-input"
                         label="Last name"

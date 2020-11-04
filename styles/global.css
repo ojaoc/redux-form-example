@@ -1,6 +1,7 @@
 body {
     font-family: "Roboto", sans-serif;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     background-image: url("../public/redux-logo.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
