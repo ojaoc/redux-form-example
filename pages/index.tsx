@@ -10,19 +10,18 @@ import Fade from "@material-ui/core/Fade";
 const useStyles = makeStyles((theme: Theme) => ({
     paperForm: {
         padding: theme.spacing(4),
-        margin: theme.spacing(9),
         textAlign: "center",
-        minWidth: 400,
+        minWidth: 350,
     },
     paperDisplay: {
         padding: theme.spacing(6),
-        margin: theme.spacing(9),
-        minWidth: 400,
+        minWidth: 350,
     },
     container: {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        margin: "auto"
     },
 }));
 
@@ -33,7 +32,13 @@ export default function Home() {
     );
     return (
         <>
-            <Box display="flex" justifyContent="center" alignItems="center" marginTop="15vh">
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                marginTop="20vh"
+                padding="2vw"
+            >
                 <Grid container spacing={4} className={classes.container}>
                     <Grid item xs={12} xl={7}>
                         <Paper elevation={4} className={classes.paperForm}>
