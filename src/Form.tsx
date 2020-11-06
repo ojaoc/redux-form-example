@@ -14,15 +14,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const renderTextField = ({
-    label,
-    input,
-    meta: { touched, invalid, error, submitFailed },
-    ...custom
-}) => (
+const renderTextField = ({ label, input, meta: { touched, invalid, error }, ...custom }) => (
     <TextField
-        error={submitFailed && touched && invalid}
-        helperText={submitFailed && touched && error}
+        error={touched && invalid}
+        helperText={touched && error}
         label={label}
         variant="outlined"
         inputProps={{
