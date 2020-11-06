@@ -63,29 +63,16 @@ describe("<Form /> elements work properly", () => {
         expect(getByText("Clear")).toBeInTheDocument();
     });
 
-    it("Should not run validations onClickOut -> TextFields TYPE TEXT if they are empty", () => {
+    it("Should run validations onClickOut ", () => {
         const { container } = render(
             <Provider store={store}>
                 <Form />
             </Provider>
         );
-        container.querySelectorAll("input[type='text']").forEach((input) => {
+        container.querySelectorAll("input").forEach((input) => {
             fireEvent.focus(input);
             fireEvent.blur(input);
-            expect(input).toHaveAttribute("aria-invalid", "false");
-        });
-    });
-
-    it("Should not run validations onClickOut -> TextFields TYPE PASSWORD if they are empty", () => {
-        const { container } = render(
-            <Provider store={store}>
-                <Form />
-            </Provider>
-        );
-        container.querySelectorAll("input[type='password']").forEach((input) => {
-            fireEvent.focus(input);
-            fireEvent.blur(input);
-            expect(input).toHaveAttribute("aria-invalid", "false");
+            expect(input).toHaveAttribute("aria-invalid", "true");
         });
     });
 
