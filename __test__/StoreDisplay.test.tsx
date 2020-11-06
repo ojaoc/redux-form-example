@@ -27,9 +27,9 @@ describe("<StoreDisplay /> renders text correctly", () => {
                 <StoreDisplay />
             </Provider>
         );
-        expect(getByTestId("pre-display-text")).toHaveTextContent(
-            JSON.stringify(mockData, null, 4)
-        );
+
+        const text = getByTestId("pre-display-text").textContent.replace(/\s/g, "");
+        expect(text).toBe(JSON.stringify(mockData).replace(/\s/g, ""));
     });
 });
 
