@@ -1,11 +1,8 @@
 import { Typography } from "@material-ui/core";
 import React from "react";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 
-const StoreDisplay = () => {
-    const formData = useSelector(
-        (state) => state.form["user-info"] && state.form["user-info"].values
-    );
+const StoreDisplay = ({ formData }) => {
     return (
         <Typography variant="h5">
             <pre data-testid="pre-display-text">{JSON.stringify(formData, null, 4)}</pre>
@@ -13,4 +10,12 @@ const StoreDisplay = () => {
     );
 };
 
-export default StoreDisplay;
+const mapStateToProps = (state) => {
+    const { form } = state;
+
+    return {
+        formData: form["user-info"] && form["user-info"].values,
+    };
+};
+
+export default connect(mapStateToProps)(StoreDisplay);

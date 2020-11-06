@@ -1,38 +1,35 @@
 import React from "react";
 import StoreDisplay from "../src/StoreDisplay";
-import { render, within } from "@testing-library/react";
+import { getDefaultNormalizer, render, within } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import { createStore } from "redux";
+import { change } from "redux-form";
 import rootReducer from "../src/reducers";
 
 const store = createStore(rootReducer);
-jest.mock("react-redux", () => ({
-    ...jest.requireActual("react-redux"),
-    useSelector: jest.fn(),
-}));
 
 describe("<StoreDisplay /> renders text correctly", () => {
-    const mockData = "Sample Data";
-
-    beforeEach(() => {
-        useSelector.mockImplementation(() => mockData);
-    });
-
-    afterEach(() => {
-        useSelector.mockClear();
-    });
-
     it("Renders string", () => {
+        const mockData = {
+            username: "Teste123",
+            password: "Teste123",
+            "first-name": "Teste123",
+            "last-name": "Teste123",
+        };
+
+        Object.keys(mockData).forEach((field) =>
+            store.dispatch(change("user-info", field, mockData[field]))
+        );
+
         const { getByTestId } = render(
             <Provider store={store}>
                 <StoreDisplay />
             </Provider>
         );
-        const { getByText } = within(getByTestId("pre-display-text"));
-        expect(getByText('"Sample Data"')).toBeInTheDocument();
-        // Needs to be like this because of <pre> and JSON.stringify(), which puts
-        // "" around the string
+
+        const text = getByTestId("pre-display-text").textContent.replace(/\s/g, "");
+        expect(text).toBe(JSON.stringify(mockData).replace(/\s/g, ""));
     });
 });
 
