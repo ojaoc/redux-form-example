@@ -14,7 +14,7 @@ const mapStateToProps = (state) => {
     const { form } = state;
 
     return {
-        formData: form["user-info"].values,
+        formData: form["user-info"] && form["user-info"].values,
     };
 };
 
