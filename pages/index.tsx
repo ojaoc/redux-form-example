@@ -4,7 +4,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Form from "../src/Form";
 import StoreDisplay from "../src/StoreDisplay";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import Fade from "@material-ui/core/Fade";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -25,11 +25,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-export default function Home() {
+function Home({ isSubmitSucceeded }) {
     const classes = useStyles();
-    const isSubmit = useSelector(
-        (state) => state.form["user-info"] && state.form["user-info"].submitSucceeded
-    );
     return (
         <>
             <Box
@@ -46,7 +43,7 @@ export default function Home() {
                         </Paper>
                     </Grid>
                     <Grid item xs={12} xl={5}>
-                        <Fade in={isSubmit}>
+                        <Fade in={isSubmitSucceeded}>
                             <Paper elevation={4} className={classes.paperDisplay}>
                                 <StoreDisplay />
                             </Paper>
@@ -57,3 +54,13 @@ export default function Home() {
         </>
     );
 }
+
+const mapStateToProps = (state) => {
+    const { form } = state;
+
+    return {
+        isSubmitSucceeded: form["user-info"] && form["user-info"].submitSucceeded,
+    };
+};
+
+export default connect(mapStateToProps)(Home);
